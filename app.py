@@ -77,6 +77,15 @@ def get_lowest_DD_cases_data():
     trace = go.Bar(x=lowest_DD_cases.index, y=lowest_DD_cases.values, name='Lowest DD Cases Each Year')
     return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
 
+def get_highest_AoW_cases_data():
+    highest_AoW_cases = df.groupby('Year')['AoW'].max()
+    trace = go.Bar(x=highest_AoW_cases.index, y=highest_AoW_cases.values, name='Highest AoW Cases Each Year')
+    return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
+
+def get_lowest_AoW_cases_data():
+    lowest_AoW_cases = df.groupby('Year')['AoW'].min()
+    trace = go.Bar(x=lowest_AoW_cases.index, y=lowest_AoW_cases.values, name='Lowest AoW Cases Each Year')
+    return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
 
 def get_highest_lowest_other_crimes_data():
     crimes = ['K&A','DD', 'AoW', 'AoM', 'DV', 'WT']
@@ -120,11 +129,15 @@ def yearly_comparison():
     lowest_rape_cases_data = get_lowest_rape_cases_data()
     highest_DD_cases_data = get_highest_DD_cases_data()
     lowest_DD_cases_data = get_lowest_DD_cases_data()
+    highest_AoW_cases_data = get_highest_AoW_cases_data()
+    lowest_AoW_cases_data = get_lowest_AoW_cases_data()
     highest_lowest_other_crimes_data = get_highest_lowest_other_crimes_data()
     return render_template('yearly_comparison.html', highest_rape_cases_data=highest_rape_cases_data,
                            lowest_rape_cases_data=lowest_rape_cases_data,
                            highest_DD_cases_data=highest_DD_cases_data,
                            lowest_DD_cases_data=lowest_DD_cases_data,
+                           highest_AoW_cases_data=highest_AoW_cases_data,
+                           lowest_AoW_cases_data=lowest_AoW_cases_data,
                            highest_lowest_other_crimes_data=highest_lowest_other_crimes_data)
 
 if __name__ == '__main__':

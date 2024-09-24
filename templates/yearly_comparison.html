@@ -14,11 +14,19 @@
     </div>
     <div>
         <h2 class="text-xl font-semibold mb-2">Highest DD Cases Each Year</h2>
-        <div id="highest-rape-cases-chart"></div>
+        <div id="highest-DD-cases-chart"></div>
     </div>
     <div>
         <h2 class="text-xl font-semibold mb-2">Lowest DD Cases Each Year</h2>
-        <div id="lowest-rape-cases-chart"></div>
+        <div id="lowest-DD-cases-chart"></div>
+    </div>
+    <div>
+        <h2 class="text-xl font-semibold mb-2">Highest AoW Cases Each Year</h2>
+        <div id="highest-AoW-cases-chart"></div>
+    </div>
+    <div></div>
+        <h2 class="text-xl font-semibold mb-2">Lowest AoW Cases Each Year</h2>
+        <div id="lowest-AoW-cases-chart"></div>
     </div>
     <div class="col-span-2">
         <h2 class="text-xl font-semibold mb-2">Highest vs Lowest for Other Crimes</h2>
@@ -39,6 +47,13 @@
 
     var lowestDDCasesData = {{ lowest_DD_cases_data | safe }};
     Plotly.newPlot('lowest-DD-cases-chart', lowestDDCasesData);
+
+    var highestAoWCasesData = {{ highest_AoW_cases_data | safe }};
+    Plotly.newPlot('highest-AoW-cases-chart', highestAoWCasesData);
+
+    var lowestAoWCasesData = {{ lowest_AoW_cases_data | safe }};
+    Plotly.newPlot('lowest-AoW-cases-chart', lowestAoWCasesData);
+    
     
 
 
