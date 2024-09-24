@@ -38,7 +38,7 @@
     });
 </script>
 <script>
-    var AoW = {{ AoW_cases_data | safe }};
+    var AoWCasesData = {{ AoW_cases_data | safe }};
     Plotly.newPlot('AoW-cases-chart', AoWCasesData, {
         title: 'Average AoW Cases Over the Years',
         xaxis: { title: 'Year' },
@@ -62,7 +62,7 @@
     });
 </script>
 <script>
-    var rapeCasesData = {{ WT_cases_data | safe }};
+    var WTCasesData = {{ WT_cases_data | safe }};
     Plotly.newPlot('WT-cases-chart', WTCasesData, {
         title: 'Average WT Cases Over the Years',
         xaxis: { title: 'Year' },
