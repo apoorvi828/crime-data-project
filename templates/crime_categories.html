@@ -38,7 +38,7 @@
     });
 </script>
 <script>
-    var AoW = {{ AoW | safe }};
+    var AoW = {{ AoW_cases_data | safe }};
     Plotly.newPlot('AoW-cases-chart', AoWCasesData, {
         title: 'Average AoW Cases Over the Years',
         xaxis: { title: 'Year' },
