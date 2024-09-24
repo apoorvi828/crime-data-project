@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-4">Crime Categories</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+        <h2 class="text-xl font-semibold mb-2">Average Rape Cases</h2>
+        <div id="rape-cases-chart"></div>
+        <h2 class="text-xl font-semibold mb-2">Average DD Cases</h2>
+        <div id="DD-cases-chart"></div>
+        <h2 class="text-xl font-semibold mb-2">Average AoW Cases</h2>
+        <div id="AoW-cases-chart"></div>
+        <h2 class="text-xl font-semibold mb-2">Average AoM Cases</h2>
+        <div id="AoM-cases-chart"></div>
+        <h2 class="text-xl font-semibold mb-2">Average DV Cases</h2>
+        <div id="DV-cases-chart"></div>
+        <h2 class="text-xl font-semibold mb-2">Average WT Cases</h2>
+        <div id="WT-cases-chart"></div>
+    </div>
+</div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    var rapeCasesData = {{ rape_cases_data | safe }};
+    Plotly.newPlot('rape-cases-chart', rapeCasesData, {
+        title: 'Average Rape Cases Over the Years',
+        xaxis: { title: 'Year' },
+        yaxis: { title: 'Average Rape Cases' },
+    });
+</script>
+<script>
+    var DDCasesData = {{ DD_cases_data | safe }};
+    Plotly.newPlot('DD-cases-chart', DDCasesData, {
+        title: 'Average DD Cases Over the Years',
+        xaxis: { title: 'Year' },
+        yaxis: { title: 'Average DD Cases' },
+    });
+</script>
+<script>
+    var AoW = {{ AoW | safe }};
+    Plotly.newPlot('AoW-cases-chart', AoWCasesData, {
+        title: 'Average AoW Cases Over the Years',
+        xaxis: { title: 'Year' },
+        yaxis: { title: 'Average AoW Cases' },
+    });
+</script>
+<script>
+    var AoMCasesData = {{ AoM_cases_data | safe }};
+    Plotly.newPlot('AoM-cases-chart', AoMCasesData, {
+        title: 'Average AoM Cases Over the Years',
+        xaxis: { title: 'Year' },
+        yaxis: { title: 'Average AoM Cases' },
+    });
+</script>
+<script>
+    var DVCasesData = {{ DV_cases_data | safe }};
+    Plotly.newPlot('DV-cases-chart', DVCasesData, {
+        title: 'Average DV Cases Over the Years',
+        xaxis: { title: 'Year' },
+        yaxis: { title: 'Average DV Cases' },
+    });
+</script>
+<script>
+    var rapeCasesData = {{ WT_cases_data | safe }};
+    Plotly.newPlot('WT-cases-chart', WTCasesData, {
+        title: 'Average WT Cases Over the Years',
+        xaxis: { title: 'Year' },
+        yaxis: { title: 'Average WT Cases' },
+    });
+</script>
+{% endblock %}
