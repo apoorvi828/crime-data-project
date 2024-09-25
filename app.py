@@ -78,11 +78,6 @@ def get_highest_rape_cases_data():
     trace = go.Bar(x=highest_rape_cases.index, y=highest_rape_cases.values, name='Highest Rape Cases Each Year')
     return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
 
-def get_highest_K&A_cases_data():
-    highest_K&A_cases = df.groupby('Year')['K&A'].max()
-    trace = go.Bar(x=highest_K&A_cases.index, y=highest_K&A_cases.values, name='Highest K&A Cases Each Year')
-    return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
-
 def get_highest_DD_cases_data():
     highest_DD_cases = df.groupby('Year')['DD'].max()
     trace = go.Bar(x=highest_DD_cases.index, y=highest_DD_cases.values, name='Highest DD Cases Each Year')
@@ -154,7 +149,6 @@ def crime_categories():
 def yearly_comparison():
     highest_lowest_other_crimes_data = get_highest_lowest_other_crimes_data()
     highest_rape_cases_data = get_highest_rape_cases_data()
-    highest_K&A_cases_data = get_highest_K&A_cases_data()
     highest_DD_cases_data = get_highest_DD_cases_data()
     highest_AoW_cases_data = get_highest_AoW_cases_data()
     highest_AoM_cases_data = get_highest_AoM_cases_data()
@@ -162,7 +156,6 @@ def yearly_comparison():
     highest_WT_cases_data = get_highest_WT_cases_data()
     return render_template('yearly_comparison.html', highest_lowest_other_crimes_data=highest_lowest_other_crimes_data,
                            highest_rape_cases_data=highest_rape_cases_data,
-                           highest_K&A_cases_data=highest_K&A_cases_data,
                            highest_DD_cases_data=highest_DD_cases_data,
                            highest_AoW_cases_data=highest_AoW_cases_data,
                            highest_AoM_cases_data=highest_AoM_cases_data,
