@@ -62,9 +62,9 @@ def get_highest_rape_cases_data():
     trace = go.Bar(x=highest_rape_cases.index, y=highest_rape_cases.values, name='Highest Rape Cases Each Year')
     return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
 
-def get_lowest_rape_cases_data():
-    lowest_rape_cases = df.groupby('Year')['Rape'].min()
-    trace = go.Bar(x=lowest_rape_cases.index, y=lowest_rape_cases.values, name='Lowest Rape Cases Each Year')
+def get_highest_K&A_cases_data():
+    highest_K&A_cases = df.groupby('Year')['K&A'].max()
+    trace = go.Bar(x=highest_K&A_cases.index, y=highest_K&A_cases.values, name='Highest K&A Cases Each Year')
     return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
 
 def get_highest_DD_cases_data():
@@ -72,23 +72,28 @@ def get_highest_DD_cases_data():
     trace = go.Bar(x=highest_DD_cases.index, y=highest_DD_cases.values, name='Highest DD Cases Each Year')
     return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
 
-def get_lowest_DD_cases_data():
-    lowest_DD_cases = df.groupby('Year')['DD'].min()
-    trace = go.Bar(x=lowest_DD_cases.index, y=lowest_DD_cases.values, name='Lowest DD Cases Each Year')
-    return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
-
 def get_highest_AoW_cases_data():
     highest_AoW_cases = df.groupby('Year')['AoW'].max()
     trace = go.Bar(x=highest_AoW_cases.index, y=highest_AoW_cases.values, name='Highest AoW Cases Each Year')
     return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
 
-def get_lowest_AoW_cases_data():
-    lowest_AoW_cases = df.groupby('Year')['AoW'].min()
-    trace = go.Bar(x=lowest_AoW_cases.index, y=lowest_AoW_cases.values, name='Lowest AoW Cases Each Year')
+def get_highest_AoM_cases_data():
+    highest_AoM_cases = df.groupby('Year')['AoM'].max()
+    trace = go.Bar(x=highest_AoM_cases.index, y=highest_AoM_cases.values, name='Highest AoM Cases Each Year')
+    return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
+
+def get_highest_DV_cases_data():
+    highest_DV_cases = df.groupby('Year')['DV'].max()
+    trace = go.Bar(x=highest_DV_cases.index, y=highest_DV_cases.values, name='Highest DV Cases Each Year')
+    return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
+
+def get_highest_WT_cases_data():
+    highest_WT_cases = df.groupby('Year')['WT'].max()
+    trace = go.Bar(x=highest_WT_cases.index, y=highest_WT_cases.values, name='Highest WT Cases Each Year')
     return json.dumps([trace], cls=plotly.utils.PlotlyJSONEncoder)
 
 def get_highest_lowest_other_crimes_data():
-    crimes = ['K&A','DD', 'AoW', 'AoM', 'DV', 'WT']
+    crimes = ['Rape','K&A','DD', 'AoW', 'AoM', 'DV', 'WT']
     highest_lowest_other = df.groupby('Year').agg({crime: ['min', 'max'] for crime in crimes})
     
     traces = []
@@ -125,20 +130,22 @@ def crime_categories():
 # Route for Yearly Comparison Page
 @app.route('/yearly-comparison')
 def yearly_comparison():
-    highest_rape_cases_data = get_highest_rape_cases_data()
-    lowest_rape_cases_data = get_lowest_rape_cases_data()
-    highest_DD_cases_data = get_highest_DD_cases_data()
-    lowest_DD_cases_data = get_lowest_DD_cases_data()
-    highest_AoW_cases_data = get_highest_AoW_cases_data()
-    lowest_AoW_cases_data = get_lowest_AoW_cases_data()
     highest_lowest_other_crimes_data = get_highest_lowest_other_crimes_data()
-    return render_template('yearly_comparison.html', highest_rape_cases_data=highest_rape_cases_data,
-                           lowest_rape_cases_data=lowest_rape_cases_data,
+    highest_rape_cases_data = get_highest_rape_cases_data()
+    highest_K&A_cases_data = get_highest_K&A_cases_data()
+    highest_DD_cases_data = get_highest_DD_cases_data()
+    highest_AoW_cases_data = get_highest_AoW_cases_data()
+    highest_AoM_cases_data = get_highest_AoM_cases_data()
+    highest_DV_cases_data = get_highest_DV_cases_data()
+    highest_WT_cases_data = get_highest_WT_cases_data()
+    return render_template('yearly_comparison.html', highest_lowest_other_crimes_data=highest_lowest_other_crimes_data,
+                           highest_rape_cases_data=highest_rape_cases_data,
+                           highest_K&A_cases_data=highest_K&A_cases_data,
                            highest_DD_cases_data=highest_DD_cases_data,
-                           lowest_DD_cases_data=lowest_DD_cases_data,
                            highest_AoW_cases_data=highest_AoW_cases_data,
-                           lowest_AoW_cases_data=lowest_AoW_cases_data,
-                           highest_lowest_other_crimes_data=highest_lowest_other_crimes_data)
-
+                           highest_AoM_cases_data=highest_AoM_cases_data,
+                           highest_DV_cases_data=highest_DV_cases_data,
+                           highest_WT_cases_data=highest_WT_cases_data)
+                          
 if __name__ == '__main__':
     app.run(debug=True)

@@ -4,6 +4,10 @@
 <h1 class="text-3xl font-bold mb-4">Yearly Crime Comparison</h1>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="col-span-2">
+        <h2 class="text-xl font-semibold mb-2">Highest vs Lowest for Other Crimes</h2>
+        <div id="highest-lowest-other-crimes-chart"></div>
+    </div>
     <div>
         <h2 class="text-xl font-semibold mb-2">Highest Rape Cases Each Year</h2>
         <div id="highest-rape-cases-chart"></div>
@@ -24,18 +28,29 @@
         <h2 class="text-xl font-semibold mb-2">Highest AoW Cases Each Year</h2>
         <div id="highest-AoW-cases-chart"></div>
     </div>
-    <div></div>
+    <div>
         <h2 class="text-xl font-semibold mb-2">Lowest AoW Cases Each Year</h2>
         <div id="lowest-AoW-cases-chart"></div>
     </div>
-    <div class="col-span-2">
-        <h2 class="text-xl font-semibold mb-2">Highest vs Lowest for Other Crimes</h2>
-        <div id="highest-lowest-other-crimes-chart"></div>
+    <div>
+        <h2 class="text-xl font-semibold mb-2">Highest AoM Cases Each Year</h2>
+        <div id="highest-AoM-cases-chart"></div>
+    </div>
+    <div>
+        <h2 class="text-xl font-semibold mb-2">Highest DV Cases Each Year</h2>
+        <div id="highest-DV-cases-chart"></div>
+    </div>
+    <div></div>
+        <h2 class="text-xl font-semibold mb-2">Highest WT Cases Each Year</h2>
+        <div id="highest-WT-cases-chart"></div>
     </div>
 </div>
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
+    var highestLowestOtherCrimesData = {{ highest_lowest_other_crimes_data | safe }};
+    Plotly.newPlot('highest-lowest-other-crimes-chart', highestLowestOtherCrimesData);
+   
     var highestRapeCasesData = {{ highest_rape_cases_data | safe }};
     Plotly.newPlot('highest-rape-cases-chart', highestRapeCasesData);
 
@@ -53,11 +68,15 @@
 
     var lowestAoWCasesData = {{ lowest_AoW_cases_data | safe }};
     Plotly.newPlot('lowest-AoW-cases-chart', lowestAoWCasesData);
-    
-    
 
+    var highestAoMCasesData = {{ highest_AoM_cases_data | safe }};
+    Plotly.newPlot('highest-AoM-cases-chart', highestAoMCasesData);
 
-    var highestLowestOtherCrimesData = {{ highest_lowest_other_crimes_data | safe }};
-    Plotly.newPlot('highest-lowest-other-crimes-chart', highestLowestOtherCrimesData);
+    var highestDVCasesData = {{ highest_DV_cases_data | safe }};
+    Plotly.newPlot('highest-DV-cases-chart', highestDVCasesData);
+
+    var highestWTCasesData = {{ highest_WT_cases_data | safe }};
+    Plotly.newPlot('highest-WT-cases-chart', highestWTCasesData);
+
 </script>
 {% endblock %}
