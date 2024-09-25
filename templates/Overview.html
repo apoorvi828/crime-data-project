@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crimes Against Women in India - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .chart-container {
+            transition: all 0.3s ease;
+        }
+        
+        .chart-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .bg-glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .text-shadow {
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hover-zoom {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-zoom:hover {
+            transform: scale(1.07);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 102, 204, 0.1), rgba(102, 102, 255, 0.1));
+        }
+
+        /* Custom button styles */
+        .cta-button {
+            background-color: #6366F1;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #4F46E5;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-900 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-indigo-700 text-white py-8 shadow-lg">
+        <div class="container mx-auto px-4">
+            <h1 class="text-5xl font-bold text-shadow">Crimes Against Women in India</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-16">
+
+        <!-- Hero Section -->
+        <section class="mb-16 bg-glass rounded-xl shadow-xl overflow-hidden" data-aos="fade-up">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 p-10">
+                    <h2 class="text-5xl font-bold text-indigo-800 mb-6 text-shadow">Understanding the Crisis</h2>
+                    <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                        Crimes against women in India remain a critical issue, demanding our attention and action. This dashboard provides a comprehensive overview of various crime categories, their trends, and impact across different states.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-4">
+                        <li class="hover-zoom text-lg">Analyze data from 2001 to 2021</li>
+                        <li class="hover-zoom text-lg">Compare crime rates across different states</li>
+                        <li class="hover-zoom text-lg">Understand year-over-year growth in various crime categories</li>
+                        <li class="hover-zoom text-lg">Identify patterns and trends to inform policy decisions</li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 p-4">
+                    <img src="https://via.placeholder.com/800x600" alt="Women's Safety Illustration" class="w-full h-full object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300" />
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Statistics Section -->
+        <section class="mb-16" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="text-4xl font-bold text-indigo-800 mb-6 text-shadow">Key Statistics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom">
+                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">Total Cases in 2021</h3>
+                    <p class="text-5xl font-bold text-gray-800">4,28,278</p>
+                    <p class="text-sm text-gray-600 mt-4">A 15.3% increase from 2020</p>
+                </div>
+                <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom">
+                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">Most Affected State</h3>
+                    <p class="text-5xl font-bold text-gray-800">Uttar Pradesh</p>
+                    <p class="text-sm text-gray-600 mt-4">56,083 cases reported in 2021</p>
+                </div>
+                <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom">
+                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">Highest Crime Rate</h3>
+                    <p class="text-5xl font-bold text-gray-800">Assam</p>
+                    <p class="text-sm text-gray-600 mt-4">154.3 per lakh population</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="mb-16" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="text-4xl font-bold text-indigo-800 mb-6 text-shadow">Crime Trends Analysis</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Growth Rate of Crimes Chart -->
+                <div class="bg-glass p-6 rounded-xl shadow-lg chart-container">
+                    <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Annual Growth Rate of Crimes</h3>
+                    <div id="growth-rate-chart" class="h-80"></div>
+                </div>
+
+                <!-- Total Cases Per Year Chart -->
+                <div class="bg-glass p-6 rounded-xl shadow-lg chart-container">
+                    <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Total Cases Per Year</h3>
+                    <div id="total-cases-chart" class="h-80"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Insights Section -->
+        <section class="bg-glass p-10 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="300">
+            <h2 class="text-4xl font-bold text-indigo-800 mb-6 text-shadow">Key Insights & Analysis</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="hover-zoom">
+                    <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Crime Trends</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-4">
+                        <li>Significant increase in cyber crimes against women</li>
+                        <li>Domestic violence cases saw a spike during the COVID-19 pandemic</li>
+                        <li>Gradual decrease in dowry-related crimes over the past decade</li>
+                    </ul>
+                </div>
+                <div class="hover-zoom">
+                    <h3 class="text-2xl font-semibold text-indigo-600 mb-4">State-wise Insights</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-4">
+                        <li>UP leads in overall crimes but has seen a drop in reported cases of dowry deaths</li>
+                        <li>Assam's high crime rate is largely due to the increase in harassment and assault cases</li>
+                        <li>Southern states like Kerala and Tamil Nadu report fewer crimes but higher conviction rates</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-indigo-700 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Crimes Against Women Dashboard | Developed with ❤️</p>
+        </div>
+    </footer>
+
+    <!-- AOS (Animation) Initialization -->
+    <script>
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+
+    <!-- Chart Data -->
+    <script>
+        Plotly.newPlot('growth-rate-chart', [{
+            x: ['2001', '2005', '2010', '2015', '2020'],
+            y: [15, 20, 30, 40, 60],
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: { color: '#6366F1' }
+        }]);
+
+        Plotly.newPlot('total-cases-chart', [{
+            x: ['2001', '2005', '2010', '2015', '2020'],
+            y: [300000, 350000, 400000, 450000, 500000],
+            type: 'bar',
+            marker: { color: '#EC4899' }
+        }]);
+    </script>
+
+</body>
+</html>

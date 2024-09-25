@@ -23,8 +23,24 @@ def get_total_cases_data():
     return json.dumps(traces, cls=plotly.utils.PlotlyJSONEncoder)
 
 def get_average_cases_by_state():
+    # Group the data by 'State' and calculate the mean for the specified columns
     avg_cases_by_state = df.groupby('State')[['Rape', 'K&A', 'DD', 'AoW', 'AoM', 'DV', 'WT']].mean()
-    traces = [go.Pie(labels=avg_cases_by_state.index, values=avg_cases_by_state[crime], name=crime) for crime in avg_cases_by_state]
+
+    # Create histograms for each crime category with adjusted width
+    traces = []
+    for crime in avg_cases_by_state.columns:
+        trace = go.Histogram(
+            x=avg_cases_by_state[crime],
+            name=crime,
+            marker=dict(
+                line=dict(
+                    width=0.5  # Adjust the width here
+                )
+            )
+        )
+        traces.append(trace)
+
+    # Convert the charts to JSON format
     return json.dumps(traces, cls=plotly.utils.PlotlyJSONEncoder)
 
 def get_rape_cases_data():
@@ -95,6 +111,12 @@ def home():
     growth_rate_data = get_growth_rate_data()
     total_cases_data = get_total_cases_data()
     return render_template('index.html', growth_rate_data=growth_rate_data, total_cases_data=total_cases_data)
+
+@app.route('/overview')
+def overview():
+    growth_rate_data = get_growth_rate_data()
+    total_cases_data = get_total_cases_data()
+    return render_template('overview.html', growth_rate_data=growth_rate_data, total_cases_data=total_cases_data)
 
 # Route for Crime Distribution Page
 @app.route('/crime-distribution')
