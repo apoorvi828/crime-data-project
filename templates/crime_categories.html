@@ -33,15 +33,35 @@
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
+        
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hover-zoom {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-zoom:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
         .highlight-box {
             background: linear-gradient(135deg, rgba(255, 102, 204, 0.1), rgba(102, 102, 255, 0.1));
         }
 
-        .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        .cta-button {
+            background-color: #FF69B4;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
-
+        .cta-button:hover {
+            background-color: #FF1493;
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 <body class="font-sans antialiased text-gray-900 min-h-screen">
@@ -49,128 +69,143 @@
     <!-- Header -->
     <header class="bg-gradient-to-r from-red-800 to-white text-white py-12 shadow-lg relative overflow-hidden">
         <div class="container mx-auto px-4 relative z-10">
-            <h1 class="text-5xl font-bold text-shadow mb-4">Crime Categories Analysis</h1>
-            <p class="text-xl">Deep dive into the different categories of crimes against women</p>
+            <h1 class="text-5xl font-bold text-shadow mb-4">Crime Categories in India</h1>
+            <p class="text-xl">Detailed insights into different types of crimes</p>
         </div>
         <div class="absolute inset-0 opacity-20" style="background-image: url('/api/placeholder/1200/400'); background-size: cover; background-position: center;"></div>
     </header>
 
-    <!-- Intro Section -->
-    <section class="container mx-auto px-4 py-10" data-aos="fade-up">
-        <div class="bg-glass rounded-xl shadow-xl p-8">
-            <h2 class="text-3xl font-bold text-red-700 mb-4">Understanding Crime Categories</h2>
-            <p class="text-lg text-gray-700 leading-relaxed">
-                This section provides an in-depth analysis of various crime categories against women, including Rape, Dowry Deaths (DD), Assault on Women (AoW), and Assault on Men (AoM). 
-                Each graph presents the average number of cases over recent years, highlighting the trends and the need for targeted interventions.
-            </p>
-        </div>
-    </section>
-
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-16">
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Rape Cases Chart -->
-            <div class="chart-container bg-white rounded-xl p-4 shadow-lg" data-aos="fade-up" data-aos-delay="100">
-                <h2 class="text-xl font-semibold text-red-600 mb-2">Average Rape Cases</h2>
-                <div id="rape-cases-chart"></div>
-                <p class="text-gray-700 mt-4">
-                    The average number of rape cases reported shows a concerning trend over the years, indicating a persistent issue that requires urgent attention and action from law enforcement and society.
-                </p>
+        <!-- Hero Section -->
+        <section class="mb-16 bg-glass rounded-xl shadow-xl overflow-hidden relative" data-aos="fade-up">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 p-10">
+                    <h2 class="text-4xl font-bold text-red-700 mb-6 text-shadow">Understanding Crime Types</h2>
+                    <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                        This section dives into various crime categories like domestic violence, sexual assault, human trafficking, and others, showing trends across India.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-4">
+                        <li class="hover-zoom text-lg">Detailed statistics on different crimes</li>
+                        <li class="hover-zoom text-lg">Breakdown by region and year</li>
+                        <li class="hover-zoom text-lg">Patterns and trends for each category</li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 p-4">
+                    <img src="https://ichef.bbci.co.uk/news/1024/cpsprodpb/3232/production/_117505821_violenceagainstwomendatapic-standard.png" alt="Crime Category Illustration" class="w-full h-full object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300" />
+                </div>
             </div>
-            
-            <!-- Dowry Deaths Chart -->
-            <div class="chart-container bg-white rounded-xl p-4 shadow-lg" data-aos="fade-up" data-aos-delay="200">
-                <h2 class="text-xl font-semibold text-red-600 mb-2">Average Dowry Death Cases</h2>
-                <div id="DD-cases-chart"></div>
-                <p class="text-gray-700 mt-4">
-                    Dowry deaths represent a significant social issue, reflecting deep-rooted cultural norms that need to be challenged. Awareness and stricter legal measures can help mitigate this crime.
-                </p>
-            </div>
+        </section>
 
-            <!-- Assault on Women Cases Chart -->
-            <div class="chart-container bg-white rounded-xl p-4 shadow-lg" data-aos="fade-up" data-aos-delay="300">
-                <h2 class="text-xl font-semibold text-red-600 mb-2">Average Assault on Women Cases</h2>
-                <div id="AoW-cases-chart"></div>
-                <p class="text-gray-700 mt-4">
-                    The data reveals the alarming frequency of assaults on women, emphasizing the need for improved safety measures and community support systems to protect vulnerable individuals.
-                </p>
+        <!-- Key Crime Categories Section -->
+        <section class="mb-16" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="text-4xl font-bold text-red-700 mb-6 text-shadow">Key Crime Categories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom bg-white">
+                    <h3 class="text-xl font-semibold text-red-600 mb-2">Domestic Violence</h3>
+                    <p class="text-5xl font-bold text-gray-800">230,000</p>
+                    <p class="text-sm text-gray-600 mt-4">Cases reported in 2021</p>
+                </div>
+                <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom bg-white">
+                    <h3 class="text-xl font-semibold text-red-600 mb-2">Sexual Assault</h3>
+                    <p class="text-5xl font-bold text-gray-800">187,000</p>
+                    <p class="text-sm text-gray-600 mt-4">Cases reported in 2021</p>
+                </div>
+                <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom bg-white">
+                    <h3 class="text-xl font-semibold text-red-600 mb-2">Human Trafficking</h3>
+                    <p class="text-5xl font-bold text-gray-800">56,000</p>
+                    <p class="text-sm text-gray-600 mt-4">Cases reported in 2021</p>
+                </div>
             </div>
+        </section>
 
-            <!-- Assault on Men Cases Chart -->
-            <div class="chart-container bg-white rounded-xl p-4 shadow-lg" data-aos="fade-up" data-aos-delay="400">
-                <h2 class="text-xl font-semibold text-red-600 mb-2">Average Assault on Men Cases</h2>
-                <div id="AoM-cases-chart"></div>
-                <p class="text-gray-700 mt-4">
-                    While the focus is often on crimes against women, it's important to also consider the statistics for assaults on men, which highlights broader societal issues and the need for a holistic approach to crime prevention.
-                </p>
+        <!-- Charts Section -->
+        <section class="mb-16" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="text-4xl font-bold text-red-700 mb-6 text-shadow">Crime Category Trends</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="chart-container bg-white rounded-xl p-4 shadow-lg">
+                    <h3 class="text-xl font-semibold text-red-600 mb-4">Crimes by Category</h3>
+                    <div id="crimesByCategoryChart"></div>
+                </div>
+                <div class="chart-container bg-white rounded-xl p-4 shadow-lg">
+                    <h3 class="text-xl font-semibold text-red-600 mb-4">Yearly Breakdown</h3>
+                    <div id="yearlyCrimeBreakdownChart"></div>
+                </div>
+                <!-- Additional Charts for crime categories -->
+                <div class="chart-container bg-white rounded-xl p-4 shadow-lg">
+                    <h3 class="text-xl font-semibold text-red-600 mb-4">Domestic Violence Trends</h3>
+                    <div id="domesticViolenceChart"></div>
+                </div>
+                <div class="chart-container bg-white rounded-xl p-4 shadow-lg">
+                    <h3 class="text-xl font-semibold text-red-600 mb-4">Sexual Assault Trends</h3>
+                    <div id="sexualAssaultChart"></div>
+                </div>
+                <div class="chart-container bg-white rounded-xl p-4 shadow-lg">
+                    <h3 class="text-xl font-semibold text-red-600 mb-4">Human Trafficking Trends</h3>
+                    <div id="humanTraffickingChart"></div>
+                </div>
             </div>
-        </div>
+        </section>
+        
+        <!-- Call to Action -->
+        <section class="text-center py-16 bg-red-50" data-aos="fade-up" data-aos-delay="300">
+            <h2 class="text-4xl font-bold text-red-700 mb-6 text-shadow">Take Action Against Crime</h2>
+            <p class="text-lg text-gray-700 mb-8">Explore the data and help spread awareness about crimes against women. Every action counts!</p>
+            <a href="#" class="cta-button">Learn More</a>
+        </section>
 
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gradient-to-r from-red-500 to-purple-600 text-white py-4">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2024 Crimes Against Women - All Rights Reserved</p>
-        </div>
+    <footer class="bg-gray-800 text-white py-6 text-center">
+        <p>&copy; 2024 Crime Dashboard. All rights reserved.</p>
     </footer>
 
+    <!-- AOS Init -->
     <script>
-        // Initialize Plotly charts for crime categories
-        const rapeCasesData = [{
-            x: [2017, 2018, 2019, 2020, 2021],
-            y: [20000, 22000, 24000, 26000, 28000],
-            type: 'bar'
-        }];
-        const rapeCasesLayout = {
-            title: 'Average Rape Cases (2017-2021)',
-            xaxis: { title: 'Year' },
-            yaxis: { title: 'Number of Cases' }
-        };
-        Plotly.newPlot('rape-cases-chart', rapeCasesData, rapeCasesLayout);
-
-        const ddCasesData = [{
-            x: [2017, 2018, 2019, 2020, 2021],
-            y: [1500, 1600, 1800, 2000, 2200],
-            type: 'bar'
-        }];
-        const ddCasesLayout = {
-            title: 'Average Dowry Death Cases (2017-2021)',
-            xaxis: { title: 'Year' },
-            yaxis: { title: 'Number of Cases' }
-        };
-        Plotly.newPlot('DD-cases-chart', ddCasesData, ddCasesLayout);
-
-        const AoWCasesData = [{
-            x: [2017, 2018, 2019, 2020, 2021],
-            y: [25000, 26000, 27000, 29000, 31000],
-            type: 'bar'
-        }];
-        const AoWCasesLayout = {
-            title: 'Average Assault on Women Cases (2017-2021)',
-            xaxis: { title: 'Year' },
-            yaxis: { title: 'Number of Cases' }
-        };
-        Plotly.newPlot('AoW-cases-chart', AoWCasesData, AoWCasesLayout);
-
-        const AoMCasesData = [{
-            x: [2017, 2018, 2019, 2020, 2021],
-            y: [10000, 11000, 12000, 13000, 14000],
-            type: 'bar'
-        }];
-        const AoMCasesLayout = {
-            title: 'Average Assault on Men Cases (2017-2021)',
-            xaxis: { title: 'Year' },
-            yaxis: { title: 'Number of Cases' }
-        };
-        Plotly.newPlot('AoM-cases-chart', AoMCasesData, AoMCasesLayout);
-    </script>
-
-    <script>
-        // Initialize AOS (Animate On Scroll Library)
         AOS.init();
     </script>
+
+    <!-- Plotly Chart Init -->
+    <script>
+        var data1 = [{
+            x: ['Domestic Violence', 'Sexual Assault', 'Human Trafficking'],
+            y: [230000, 187000, 56000],
+            type: 'bar'
+        }];
+        Plotly.newPlot('crimesByCategoryChart', data1);
+
+        var data2 = [{
+            x: ['2017', '2018', '2019', '2020', '2021'],
+            y: [250000, 275000, 300000, 320000, 340000],
+            type: 'line'
+        }];
+        Plotly.newPlot('yearlyCrimeBreakdownChart', data2);
+
+        // Additional Chart Data
+        var data3 = [{
+            x: ['2017', '2018', '2019', '2020', '2021'],
+            y: [120000, 150000, 170000, 200000, 230000],
+            type: 'line'
+        }];
+        Plotly.newPlot('domesticViolenceChart', data3);
+
+        var data4 = [{
+            x: ['2017', '2018', '2019', '2020', '2021'],
+            y: [90000, 110000, 130000, 160000, 187000],
+            type: 'line'
+        }];
+        Plotly.newPlot('sexualAssaultChart', data4);
+
+        var data5 = [{
+            x: ['2017', '2018', '2019', '2020', '2021'],
+            y: [40000, 45000, 48000, 50000, 56000],
+            type: 'line'
+        }];
+        Plotly.newPlot('humanTraffickingChart', data5);
+    </script>
+
 </body>
 </html>
 {% endblock %}

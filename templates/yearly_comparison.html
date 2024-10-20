@@ -1,62 +1,248 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="text-3xl font-bold mb-4">Yearly Crime Comparison</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yearly Crime Comparison</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+        }
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="col-span-2">
-        <h2 class="text-xl font-semibold mb-2">Highest vs Lowest for Other Crimes</h2>
-        <div id="highest-lowest-other-crimes-chart"></div>
-    </div>
-    <div>
-        <h2 class="text-xl font-semibold mb-2">Highest Rape Cases Each Year</h2>
-        <div id="highest-rape-cases-chart"></div>
-    </div>
-   
-    <div>
-        <h2 class="text-xl font-semibold mb-2">Highest DD Cases Each Year</h2>
-        <div id="highest-DD-cases-chart"></div>
-    </div>
-    <div>
-        <h2 class="text-xl font-semibold mb-2">Highest AoW Cases Each Year</h2>
-        <div id="highest-AoW-cases-chart"></div>
-    </div>
-    <div>
-        <h2 class="text-xl font-semibold mb-2">Highest AoM Cases Each Year</h2>
-        <div id="highest-AoM-cases-chart"></div>
-    </div>
-    <div>
-        <h2 class="text-xl font-semibold mb-2">Highest DV Cases Each Year</h2>
-        <div id="highest-DV-cases-chart"></div>
-    </div>
-    <div></div>
-        <h2 class="text-xl font-semibold mb-2">Highest WT Cases Each Year</h2>
-        <div id="highest-WT-cases-chart"></div>
-    </div>
-</div>
+        .chart-container {
+            transition: all 0.3s ease;
+        }
 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script>
-    var highestLowestOtherCrimesData = {{ highest_lowest_other_crimes_data | safe }};
-    Plotly.newPlot('highest-lowest-other-crimes-chart', highestLowestOtherCrimesData);
-   
-    var highestRapeCasesData = {{ highest_rape_cases_data | safe }};
-    Plotly.newPlot('highest-rape-cases-chart', highestRapeCasesData);
+        .chart-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
 
-    var highestDDCasesData = {{ highest_DD_cases_data | safe }};
-    Plotly.newPlot('highest-DD-cases-chart', highestDDCasesData);
+        .bg-glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-    var highestAoWCasesData = {{ highest_AoW_cases_data | safe }};
-    Plotly.newPlot('highest-AoW-cases-chart', highestAoWCasesData);
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-    var highestAoMCasesData = {{ highest_AoM_cases_data | safe }};
-    Plotly.newPlot('highest-AoM-cases-chart', highestAoMCasesData);
+        .hover-zoom {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    var highestDVCasesData = {{ highest_DV_cases_data | safe }};
-    Plotly.newPlot('highest-DV-cases-chart', highestDVCasesData);
+        .hover-zoom:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
 
-    var highestWTCasesData = {{ highest_WT_cases_data | safe }};
-    Plotly.newPlot('highest-WT-cases-chart', highestWTCasesData);
+        .bg-red {
+            background-color: #ffcccc; /* Light red background */
+        }
 
-</script>
+        .text-red {
+            color: #cc0000; /* Dark red text */
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-900 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-red-600 to-white text-white py-12 shadow-lg relative overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10">
+            <h1 class="text-5xl font-bold text-shadow mb-4">Yearly Crime Comparison</h1>
+            <p class="text-xl">Comparing crime rates year by year across various categories</p>
+        </div>
+        <!-- <div class="absolute inset-0 opacity-20" style="background-image: url('https://static.dw.com/image/52116698_401.jpg'); background-size: cover; background-position: center;"></div> -->
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-16">
+
+        <!-- Stats Section -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div class="bg-red rounded-xl shadow-xl p-6 text-center hover-zoom">
+                <h3 class="text-2xl font-bold text-red mb-2">Total Crimes</h3>
+                <p class="text-3xl font-semibold">1,234</p>
+                <p class="text-gray-700">Overall crimes reported this year</p>
+            </div>
+            <div class="bg-red rounded-xl shadow-xl p-6 text-center hover-zoom">
+                <h3 class="text-2xl font-bold text-red mb-2">Rape Cases</h3>
+                <p class="text-3xl font-semibold">456</p>
+                <p class="text-gray-700">Rape cases reported this year</p>
+            </div>
+            <div class="bg-red rounded-xl shadow-xl p-6 text-center hover-zoom">
+                <h3 class="text-2xl font-bold text-red mb-2">Dowry Death Cases</h3>
+                <p class="text-3xl font-semibold">123</p>
+                <p class="text-gray-700">Dowry Death cases reported this year</p>
+            </div>
+        </section>
+
+        <!-- Highest vs Lowest for Other Crimes -->
+        <section class="mb-16 bg-glass rounded-xl shadow-xl p-6 hover-zoom" data-aos="fade-up">
+            <h2 class="text-4xl font-bold text-red mb-6 text-shadow">Highest vs Lowest for Other Crimes</h2>
+            <div id="highest-lowest-other-crimes-chart" class="chart-container"></div>
+        </section>
+
+        <!-- Crime Categories Comparison -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="bg-glass rounded-xl shadow-xl p-6 hover-zoom">
+                <h2 class="text-2xl font-semibold text-red mb-4">Highest Rape Cases Each Year</h2>
+                <div id="highest-rape-cases-chart" class="chart-container"></div>
+            </div>
+
+            <div class="bg-glass rounded-xl shadow-xl p-6 hover-zoom">
+                <h2 class="text-2xl font-semibold text-red mb-4">Highest Dowry Death Cases Each Year</h2>
+                <div id="highest-DD-cases-chart" class="chart-container"></div>
+            </div>
+
+            <div class="bg-glass rounded-xl shadow-xl p-6 hover-zoom">
+                <h2 class="text-2xl font-semibold text-red mb-4">Highest Assault on Women Cases Each Year</h2>
+                <div id="highest-AoW-cases-chart" class="chart-container"></div>
+            </div>
+
+            <div class="bg-glass rounded-xl shadow-xl p-6 hover-zoom">
+                <h2 class="text-2xl font-semibold text-red mb-4">Highest Assault on Minors Cases Each Year</h2>
+                <div id="highest-AoM-cases-chart" class="chart-container"></div>
+            </div>
+
+            <div class="bg-glass rounded-xl shadow-xl p-6 hover-zoom">
+                <h2 class="text-2xl font-semibold text-red mb-4">Highest Domestic Violence Cases Each Year</h2>
+                <div id="highest-DV-cases-chart" class="chart-container"></div>
+            </div>
+
+            <div class="bg-glass rounded-xl shadow-xl p-6 hover-zoom">
+                <h2 class="text-2xl font-semibold text-red mb-4">Highest Witchcraft Cases Each Year</h2>
+                <div id="highest-WT-cases-chart" class="chart-container"></div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 text-center">
+        <p>&copy; 2024 Crime Dashboard. All rights reserved.</p>
+    </footer>
+
+    <!-- AOS Init -->
+    <script>
+        AOS.init();
+    </script>
+
+    <!-- Plotly Chart Init -->
+    <script>
+        // Placeholder data for the graphs. Replace these with your actual data
+        var highestLowestOtherCrimesData = [{
+            x: ['2018', '2019', '2020', '2021', '2022'],
+            y: [200, 150, 300, 400, 250],
+            type: 'bar',
+            name: 'Highest',
+            marker: { color: 'rgba(255,0,0,0.6)' }
+        }, {
+            x: ['2018', '2019', '2020', '2021', '2022'],
+            y: [50, 30, 70, 90, 60],
+            type: 'bar',
+            name: 'Lowest',
+            marker: { color: 'rgba(0,255,0,0.6)' }
+        }];
+        
+        var highestRapeCasesData = [{
+            x: ['2018', '2019', '2020', '2021', '2022'],
+            y: [100, 150, 200, 250, 300],
+            type: 'bar',
+            marker: { color: 'rgba(255,0,0,0.6)' }
+        }];
+        
+        var highestDDCasesData = [{
+            x: ['2018', '2019', '2020', '2021', '2022'],
+            y: [10, 20, 30, 15, 25],
+            type: 'bar',
+            marker: { color: 'rgba(255,0,0,0.6)' }
+        }];
+        
+        var highestAoWCasesData = [{
+            x: ['2018', '2019', '2020', '2021', '2022'],
+            y: [50, 70, 90, 80, 60],
+            type: 'bar',
+            marker: { color: 'rgba(255,0,0,0.6)' }
+        }];
+        
+        var highestAoMCasesData = [{
+            x: ['2018', '2019', '2020', '2021', '2022'],
+            y: [5, 10, 15, 8, 12],
+            type: 'bar',
+            marker: { color: 'rgba(255,0,0,0.6)' }
+        }];
+        
+        var highestDVCasesData = [{
+            x: ['2018', '2019', '2020', '2021', '2022'],
+            y: [30, 40, 50, 45, 60],
+            type: 'bar',
+            marker: { color: 'rgba(255,0,0,0.6)' }
+        }];
+        
+        var highestWTCasesData = [{
+            x: ['2018', '2019', '2020', '2021', '2022'],
+            y: [2, 4, 6, 3, 5],
+            type: 'bar',
+            marker: { color: 'rgba(255,0,0,0.6)' }
+        }];
+
+        // Initialize the charts
+        Plotly.newPlot('highest-lowest-other-crimes-chart', highestLowestOtherCrimesData, {
+            title: 'Highest vs Lowest Other Crimes Each Year',
+            barmode: 'group',
+            xaxis: { title: 'Year' },
+            yaxis: { title: 'Number of Cases' }
+        });
+        
+        Plotly.newPlot('highest-rape-cases-chart', highestRapeCasesData, {
+            title: 'Highest Rape Cases Each Year',
+            xaxis: { title: 'Year' },
+            yaxis: { title: 'Number of Cases' }
+        });
+
+        Plotly.newPlot('highest-DD-cases-chart', highestDDCasesData, {
+            title: 'Highest Dowry Death Cases Each Year',
+            xaxis: { title: 'Year' },
+            yaxis: { title: 'Number of Cases' }
+        });
+
+        Plotly.newPlot('highest-AoW-cases-chart', highestAoWCasesData, {
+            title: 'Highest Assault on Women Cases Each Year',
+            xaxis: { title: 'Year' },
+            yaxis: { title: 'Number of Cases' }
+        });
+
+        Plotly.newPlot('highest-AoM-cases-chart', highestAoMCasesData, {
+            title: 'Highest Assault on Minors Cases Each Year',
+            xaxis: { title: 'Year' },
+            yaxis: { title: 'Number of Cases' }
+        });
+
+        Plotly.newPlot('highest-DV-cases-chart', highestDVCasesData, {
+            title: 'Highest Domestic Violence Cases Each Year',
+            xaxis: { title: 'Year' },
+            yaxis: { title: 'Number of Cases' }
+        });
+
+        Plotly.newPlot('highest-WT-cases-chart', highestWTCasesData, {
+            title: 'Highest Witchcraft Cases Each Year',
+            xaxis: { title: 'Year' },
+            yaxis: { title: 'Number of Cases' }
+        });
+    </script>
+</body>
+</html>
 {% endblock %}
