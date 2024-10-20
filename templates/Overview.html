@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +16,7 @@
         
         body {
             font-family: 'Poppins', sans-serif;
+            background-color: #FFF0F5;
         }
         
         .chart-container {
@@ -31,7 +35,7 @@
         }
         
         .text-shadow {
-            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .hover-zoom {
@@ -39,47 +43,101 @@
         }
         
         .hover-zoom:hover {
-            transform: scale(1.07);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         
         .highlight-box {
             background: linear-gradient(135deg, rgba(255, 102, 204, 0.1), rgba(102, 102, 255, 0.1));
         }
 
-        /* Custom button styles */
         .cta-button {
-            background-color: #6366F1;
+            background-color: #FF69B4;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 25px;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .cta-button:hover {
-            background-color: #4F46E5;
+            background-color: #FF1493;
             transform: translateY(-3px);
+        }
+
+        .ribbon {
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            position: absolute;
+        }
+        .ribbon::before,
+        .ribbon::after {
+            position: absolute;
+            z-index: -1;
+            content: '';
+            display: block;
+            border: 5px solid #FF69B4;
+        }
+        .ribbon span {
+            position: absolute;
+            display: block;
+            width: 225px;
+            padding: 15px 0;
+            background-color: red;
+            box-shadow: 0 5px 10px rgba(0,0,0,.1);
+            color: #fff;
+            font: 700 18px/1 'Lato', sans-serif;
+            text-shadow: 0 1px 1px rgba(0,0,0,.2);
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .ribbon-top-left {
+            top: -10px;
+            left: -10px;
+        }
+        .ribbon-top-left::before,
+        .ribbon-top-left::after {
+            border-top-color: transparent;
+            border-left-color: transparent;
+        }
+        .ribbon-top-left::before {
+            top: 0;
+            right: 0;
+        }
+        .ribbon-top-left::after {
+            bottom: 0;
+            left: 0;
+        }
+        .ribbon-top-left span {
+            right: -25px;
+            top: 30px;
+            transform: rotate(-45deg);
         }
     </style>
 </head>
-<body class="font-sans antialiased text-gray-900 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 min-h-screen">
+<body class="font-sans antialiased text-gray-900 min-h-screen">
+
+    
 
     <!-- Header -->
-    <header class="bg-indigo-700 text-white py-8 shadow-lg">
-        <div class="container mx-auto px-4">
-            <h1 class="text-5xl font-bold text-shadow">Crimes Against Women in India</h1>
+    <header class="bg-gradient-to-r from-red-800 to-white text-white py-12 shadow-lg relative overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10">
+            <h1 class="text-5xl font-bold text-shadow mb-4">Crimes Against Women in India</h1>
+            <p class="text-xl">A comprehensive analysis and call to action</p>
         </div>
+        <div class="absolute inset-0 opacity-20" style="background-image: url('/api/placeholder/1200/400'); background-size: cover; background-position: center;"></div>
     </header>
 
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-16">
 
         <!-- Hero Section -->
-        <section class="mb-16 bg-glass rounded-xl shadow-xl overflow-hidden" data-aos="fade-up">
+        <section class="mb-16 bg-glass rounded-xl shadow-xl overflow-hidden relative" data-aos="fade-up">
+            <div class="ribbon ribbon-top-left"><span>Take Action</span></div>
             <div class="md:flex items-center">
                 <div class="md:w-1/2 p-10">
-                    <h2 class="text-5xl font-bold text-indigo-800 mb-6 text-shadow">Understanding the Crisis</h2>
+                    <h2 class="text-4xl font-bold text-red-700 mb-6 text-shadow">Understanding the Crisis</h2>
                     <p class="text-lg text-gray-700 mb-8 leading-relaxed">
-                        Crimes against women in India remain a critical issue, demanding our attention and action. This dashboard provides a comprehensive overview of various crime categories, their trends, and impact across different states.
+                        Crimes against women in India remain a critical issue, demanding our immediate attention and action. This dashboard provides a comprehensive overview of various crime categories, their trends, and impact across different states.
                     </p>
                     <ul class="list-disc list-inside text-gray-700 space-y-4">
                         <li class="hover-zoom text-lg">Analyze data from 2001 to 2021</li>
@@ -87,29 +145,30 @@
                         <li class="hover-zoom text-lg">Understand year-over-year growth in various crime categories</li>
                         <li class="hover-zoom text-lg">Identify patterns and trends to inform policy decisions</li>
                     </ul>
+                    <!-- <button class="cta-button mt-8 font-semibold">Join the Movement</button> -->
                 </div>
                 <div class="md:w-1/2 p-4">
-                    <img src="https://via.placeholder.com/800x600" alt="Women's Safety Illustration" class="w-full h-full object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300" />
+                    <img src="https://ichef.bbci.co.uk/news/1024/cpsprodpb/3232/production/_117505821_violenceagainstwomendatapic-standard.png" alt="Women's Empowerment Illustration" class="w-full h-full object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300" />
                 </div>
             </div>
         </section>
 
         <!-- Key Statistics Section -->
         <section class="mb-16" data-aos="fade-up" data-aos-delay="100">
-            <h2 class="text-4xl font-bold text-indigo-800 mb-6 text-shadow">Key Statistics</h2>
+            <h2 class="text-4xl font-bold text-red-700 mb-6 text-shadow">Key Statistics</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom">
-                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">Total Cases in 2021</h3>
+                <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom bg-white">
+                    <h3 class="text-xl font-semibold text-red-600 mb-2">Total Cases in 2021</h3>
                     <p class="text-5xl font-bold text-gray-800">4,28,278</p>
                     <p class="text-sm text-gray-600 mt-4">A 15.3% increase from 2020</p>
                 </div>
-                <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom">
-                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">Most Affected State</h3>
+                <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom bg-white">
+                    <h3 class="text-xl font-semibold text-red-600 mb-2">Most Affected State</h3>
                     <p class="text-5xl font-bold text-gray-800">Uttar Pradesh</p>
                     <p class="text-sm text-gray-600 mt-4">56,083 cases reported in 2021</p>
                 </div>
-                <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom">
-                    <h3 class="text-xl font-semibold text-indigo-600 mb-2">Highest Crime Rate</h3>
+                <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom bg-white">
+                    <h3 class="text-xl font-semibold text-red-600 mb-2">Highest Crime Rate</h3>
                     <p class="text-5xl font-bold text-gray-800">Assam</p>
                     <p class="text-sm text-gray-600 mt-4">154.3 per lakh population</p>
                 </div>
@@ -118,80 +177,57 @@
 
         <!-- Charts Section -->
         <section class="mb-16" data-aos="fade-up" data-aos-delay="200">
-            <h2 class="text-4xl font-bold text-indigo-800 mb-6 text-shadow">Crime Trends Analysis</h2>
+            <h2 class="text-4xl font-bold text-red-700 mb-6 text-shadow">Trends Over the Years</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Growth Rate of Crimes Chart -->
-                <div class="bg-glass p-6 rounded-xl shadow-lg chart-container">
-                    <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Annual Growth Rate of Crimes</h3>
-                    <div id="growth-rate-chart" class="h-80"></div>
+                <div class="chart-container bg-white rounded-xl p-4 shadow-lg">
+                    <h3 class="text-xl font-semibold text-red-600 mb-4">Total Crimes Against Women</h3>
+                    <div id="totalCrimesChart"></div>
                 </div>
-
-                <!-- Total Cases Per Year Chart -->
-                <div class="bg-glass p-6 rounded-xl shadow-lg chart-container">
-                    <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Total Cases Per Year</h3>
-                    <div id="total-cases-chart" class="h-80"></div>
+                <div class="chart-container bg-white rounded-xl p-4 shadow-lg">
+                    <h3 class="text-xl font-semibold text-red-600 mb-4">Crimes by Category</h3>
+                    <div id="crimesByCategoryChart"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Insights Section -->
-        <section class="bg-glass p-10 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="300">
-            <h2 class="text-4xl font-bold text-indigo-800 mb-6 text-shadow">Key Insights & Analysis</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="hover-zoom">
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Crime Trends</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-4">
-                        <li>Significant increase in cyber crimes against women</li>
-                        <li>Domestic violence cases saw a spike during the COVID-19 pandemic</li>
-                        <li>Gradual decrease in dowry-related crimes over the past decade</li>
-                    </ul>
-                </div>
-                <div class="hover-zoom">
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-4">State-wise Insights</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-4">
-                        <li>UP leads in overall crimes but has seen a drop in reported cases of dowry deaths</li>
-                        <li>Assam's high crime rate is largely due to the increase in harassment and assault cases</li>
-                        <li>Southern states like Kerala and Tamil Nadu report fewer crimes but higher conviction rates</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        <script>
+            // Initialize Plotly charts
+            const totalCrimesData = [{
+                x: [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021],
+                y: [134, 149, 157, 162, 172, 187, 198, 210, 220, 250, 272, 290, 309, 320, 340, 360, 380, 410, 420, 440, 428],
+                type: 'scatter'
+            }];
+            const totalCrimesLayout = {
+                title: 'Total Crimes Against Women in India (2001-2021)',
+                xaxis: { title: 'Year' },
+                yaxis: { title: 'Number of Crimes' }
+            };
+            Plotly.newPlot('totalCrimesChart', totalCrimesData, totalCrimesLayout);
+
+            const crimesByCategoryData = [{
+                labels: ['Domestic Violence', 'Sexual Assault', 'Dowry Death', 'Acid Attacks', 'Human Trafficking'],
+                values: [187, 230, 56, 24, 11],
+                type: 'pie'
+            }];
+            const crimesByCategoryLayout = {
+                title: 'Crimes Against Women by Category (2021)',
+            };
+            Plotly.newPlot('crimesByCategoryChart', crimesByCategoryData, crimesByCategoryLayout);
+        </script>
 
     </main>
 
     <!-- Footer -->
-    <footer class="bg-indigo-700 text-white py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 Crimes Against Women Dashboard | Developed with ❤️</p>
+    <footer class="bg-gradient-to-r from-red-500 to-purple-600 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Crimes Against Women - All Rights Reserved</p>
         </div>
     </footer>
 
-    <!-- AOS (Animation) Initialization -->
     <script>
-        AOS.init({
-            duration: 1000,
-            easing: 'ease-in-out',
-            once: true
-        });
+        // Initialize AOS (Animate On Scroll Library)
+        AOS.init();
     </script>
-
-    <!-- Chart Data -->
-    <script>
-        Plotly.newPlot('growth-rate-chart', [{
-            x: ['2001', '2005', '2010', '2015', '2020'],
-            y: [15, 20, 30, 40, 60],
-            type: 'scatter',
-            mode: 'lines+markers',
-            marker: { color: '#6366F1' }
-        }]);
-
-        Plotly.newPlot('total-cases-chart', [{
-            x: ['2001', '2005', '2010', '2015', '2020'],
-            y: [300000, 350000, 400000, 450000, 500000],
-            type: 'bar',
-            marker: { color: '#EC4899' }
-        }]);
-    </script>
-
 </body>
 </html>
+{% endblock %}

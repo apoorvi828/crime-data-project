@@ -1,59 +1,201 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!--Header-->
-<div class="w-full m-0 p-0 bg-cover bg-bottom"
-    style="background-image:url('https://wallpaperaccess.com/full/2404301.jpg'); height: 60vh; max-height:460px;">
-    <div class="container max-w-4xl mx-auto pt-16 md:pt-32 text-center break-normal">
-        <!--Title-->
-        <p class="text-white font-extrabold text-3xl md:text-5xl">
-            👻 Ghostwind CSS
-        </p>
-        <p class="text-xl md:text-2xl text-gray-500">Welcome to my Blog</p>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
 
-<!--Container-->
-<div class="container px-4 md:px-0 max-w-6xl mx-auto -mt-32">
-    <div class="mx-0 sm:mx-6">
-        <div class="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empowering Change: Addressing Crimes Against Women in India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@400;600;700&display=swap');
 
-            <!--Lead Card-->
-            <div class="flex h-full bg-white rounded overflow-hidden shadow-lg" style="height: 300px;">
-                <a href="post.html" class="flex flex-wrap no-underline hover:no-underline">
-                    <div class="w-full md:w-2/3 rounded-t">
-                        <img src="https://tse1.mm.bing.net/th?id=OIP.oNapIdhvW9pRDr4bUNBWswHaEo&pid=Api&P=0&h=180" class="h-full w-full shadow">
-                    </div>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
 
-                    <div class="w-full md:w-1/3 flex flex-col flex-grow flex-shrink">
-                        <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
-                            <p class="w-full text-gray-600 text-xs md:text-sm pt-6 px-6">GETTING STARTED</p>
-                            <div class="w-full font-bold text-xl text-gray-900 px-6">👋 Welcome fellow Tailwind CSS
-                                and Ghost fan</div>
-                            <p class="text-gray-800 font-serif text-base px-6 mb-5">
-                                This starter template is an attempt to replicate the default Ghost theme "Casper"
-                                using Tailwind CSS and vanilla Javascript.
-                            </p>
-                        </div>
+        .bg-gradient {
+            background: linear-gradient(135deg, #C21807, #8B0000); /* Updated gradient colors */
+        }
 
-                        <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow-lg p-6">
-                            <div class="flex items-center justify-between">
-                                <img class="w-8 h-8 rounded-full mr-4 avatar" data-tippy-content="Author Name"
-                                    src="http://i.pravatar.cc/300" alt="Avatar of Author">
-                                <p class="text-gray-600 text-xs md:text-sm">1 MIN READ</p>
-                            </div>
-                        </div>
-                    </div>
+        .text-gradient {
+            background: linear-gradient(135deg, #C21807, #8B0000); /* Updated gradient colors */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-                </a>
-            </div>
-            <!--/Lead Card-->
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero section background with parallax effect */
+        .hero-bg {
+            background-image: url('https://www.unwomen.org/sites/default/files/Headquarters/Images/Sections/Multimedia/2017/infographic-violence-against-women-Opening-Screen-EN-960x700-Loop.gif?h=700&w=960');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Parallax effect */
+            background-position: center;
+        }
+
+        /* Testimonial parallax */
+        .parallax {
+            background-image: url('https://odishabytes.com/wp-content/uploads/2017/10/crime_against_women2_647_030716114951.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+   
+
+    <!-- Hero Section with parallax effect -->
+    <header class="hero-bg text-white py-40 bg-red-700 h-[80vh]">
+        <div class="container mx-auto px-6 text-center">
+            <!-- <h1 class="text-5xl font-bold mb-4" data-aos="fade-up">Empowering Change in India</h1>
+            <p class="text-xl mb-8" data-aos="fade-up" data-aos-delay="200">Join our mission to combat crimes against women and create a safer society</p>
+            <a href="#about"
+                class="bg-white text-red-600 px-6 py-3 rounded-full font-semibold hover:bg-red-100 transition"
+                data-aos="fade-up" data-aos-delay="400">Learn More</a> -->
         </div>
+    </header>
 
-    </div>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gradient" data-aos="fade-up">About Our Initiative</h2>
+            <div class="flex flex-wrap -mx-4">
+                <div class="w-full md:w-1/2 px-4 mb-8" data-aos="fade-right">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                        <h3 class="text-2xl font-semibold mb-4 text-red-600">Our Mission</h3> <!-- Updated color -->
+                        <p class="text-gray-700 leading-relaxed">We are dedicated to raising awareness about crimes against women in India and advocating for their rights. Our mission is to create a safer environment for women through education, advocacy, and support.</p>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 px-4 mb-8" data-aos="fade-left">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                        <h3 class="text-2xl font-semibold mb-4 text-red-600">Our Approach</h3> <!-- Updated color -->
+                        <p class="text-gray-700 leading-relaxed">By combining comprehensive data analysis with grassroots initiatives, we aim to empower women and prevent violence. We believe that informed communities can lead to significant changes in societal norms.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    
+    <!-- Key Statistics Section -->
+    <section id="statistics" class="py-20 bg-gradient">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white" data-aos="fade-up">Key Statistics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md hover:scale-105 transition duration-300" data-aos="zoom-in">
+                    <h3 class="text-3xl font-semibold mb-2 text-red-600">4,28,278</h3> <!-- Updated color -->
+                    <p class="text-gray-600">Total cases reported in 2021</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md hover:scale-105 transition duration-300" data-aos="zoom-in" data-aos-delay="200">
+                    <h3 class="text-3xl font-semibold mb-2 text-red-600">15.3%</h3> <!-- Updated color -->
+                    <p class="text-gray-600">Increase in cases from 2020 to 2021</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md hover:scale-105 transition duration-300" data-aos="zoom-in" data-aos-delay="400">
+                    <h3 class="text-3xl font-semibold mb-2 text-red-600">1 in 3</h3> <!-- Updated color -->
+                    <p class="text-gray-600">Women face violence in their lifetime</p>
+                </div>
+            </div>
+            <div class="mt-12 text-center">
+                <p class="text-white text-lg">These statistics highlight the urgent need for action and awareness. Join us in our mission to make a difference!</p>
+            </div>
+        </div>
+    </section>
 
+    <!-- Initiatives Section with image and card layout -->
+    <section id="initiatives" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gradient" data-aos="fade-up">Our Initiatives</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md hover-scale" data-aos="fade-up">
+                    <img src="https://vistacreate-web.s3.eu-west-1.amazonaws.com/blog/uploads/2023/03/campaigns-that-empower-women.webp" alt="Campaign Image" class="w-full mb-4 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-red-600">Awareness Campaigns</h3> <!-- Updated color -->
+                    <p class="text-gray-600">Educating communities about women's rights and safety measures.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md hover-scale" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://img.freepik.com/premium-vector/legal-service-female-worker-law-firm-litigation-support-flat-vector-illustration-white-background_627510-1025.jpg" alt="Legal Support Image" class="w-full mb-4 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-red-600">Legal Support</h3> <!-- Updated color -->
+                    <p class="text-gray-600">Providing legal assistance to women facing violence and discrimination.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md hover-scale" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://media.istockphoto.com/id/1146021136/vector/woman-empowerment-and-supporting-each-other.jpg?s=612x612&w=0&k=20&c=wFwHSQTA0X2i3U4aAEZ3f5MP6usXM9e05jDgL6M9SE4=" alt="Support Groups Image" class="w-full mb-4 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-red-600">Support Groups</h3> <!-- Updated color -->
+                    <p class="text-gray-600">Creating safe spaces for women to share their experiences and support one another.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</div>
+    <!-- Testimonials Section with parallax effect -->
+    <section class="parallax py-20 text-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">Testimonials</h2>
+            <div class="flex flex-wrap justify-center">
+                <div class="bg-red-700 p-8 rounded-lg shadow-md max-w-xs mx-4 mb-8" data-aos="fade-up" data-aos-delay="200">
+                    <p>"This initiative has changed my life. I found the support I needed to stand up against violence."</p>
+                    <h4 class="mt-4 font-semibold">- Anjali S.</h4>
+                </div>
+                <div class="bg-red-700 p-8 rounded-lg shadow-md max-w-xs mx-4 mb-8" data-aos="fade-up" data-aos-delay="400">
+                    <p>"Through awareness campaigns, I've learned how to protect myself and others."</p>
+                    <h4 class="mt-4 font-semibold">- Priya K.</h4>
+                </div>
+                <div class="bg-red-700 p-8 rounded-lg shadow-md max-w-xs mx-4 mb-8" data-aos="fade-up" data-aos-delay="600">
+                    <p>"The legal support I received was invaluable. I finally feel safe."</p>
+                    <h4 class="mt-4 font-semibold">- Kavita R.</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gradient" data-aos="fade-up">Get in Touch</h2>
+            <form action="#" method="POST" class="max-w-lg mx-auto">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700">Name</label>
+                    <input type="text" id="name" name="name" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                </div>
+                <div class="mb-4">
+                    <label for="message" class="block text-gray-700">Message</label>
+                    <textarea id="message" name="message" rows="4" class="w-full p-3 border border-gray-300 rounded-lg" required></textarea>
+                </div>
+                <button type="submit" class="bg-gradient text-white px-6 py-3 rounded-lg hover:opacity-90 transition">Send
+                    Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2023 WomenSafetyIndia. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            duration: 1200,
+        });
+    </script>
+</body>
+
+</html>
 {% endblock %}
