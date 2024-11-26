@@ -3,6 +3,7 @@
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,18 +21,18 @@
         .chart-container {
             transition: all 0.3s ease;
         }
-        
+
         .chart-container:hover {
             transform: scale(1.03);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        
+
         .bg-glass {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
         .text-shadow {
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -39,7 +40,7 @@
         .hover-zoom {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .hover-zoom:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -48,13 +49,14 @@
         .highlight-box {
             background: linear-gradient(135deg, rgba(255, 102, 204, 0.1), rgba(102, 102, 255, 0.1));
         }
-        
+
         .stat-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
+
 <body class="font-sans antialiased text-gray-900 min-h-screen">
 
     <!-- Header -->
@@ -63,7 +65,7 @@
             <h1 class="text-5xl font-bold text-shadow mb-4">Crime Distribution by State</h1>
             <p class="text-xl">Analyze crime patterns across different states in India</p>
         </div>
-        
+
     </header>
 
     <!-- Main Content -->
@@ -75,7 +77,8 @@
                 <div class="md:w-1/2 p-10">
                     <h2 class="text-4xl font-bold text-purple-700 mb-6 text-shadow">Crime Cases by State</h2>
                     <p class="text-lg text-gray-700 mb-8 leading-relaxed">
-                        Explore the distribution of crime cases across various states. The chart below presents a detailed breakdown of crime statistics, including major trends and regional hotspots.
+                        Explore the distribution of crime cases across various states. The chart below presents a
+                        detailed breakdown of crime statistics, including major trends and regional hotspots.
                     </p>
                     <ul class="list-disc list-inside text-gray-700 space-y-4">
                         <li class="hover-zoom text-lg">Interactive visual breakdown of crime statistics</li>
@@ -84,7 +87,9 @@
                     </ul>
                 </div>
                 <div class="md:w-1/2 p-4">
-                    <img src="https://ichef.bbci.co.uk/news/1024/cpsprodpb/3232/production/_117505821_violenceagainstwomendatapic-standard.png" alt="India States Map" class="w-full h-full object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300" />
+                    <img src="https://ichef.bbci.co.uk/news/1024/cpsprodpb/3232/production/_117505821_violenceagainstwomendatapic-standard.png"
+                        alt="India States Map"
+                        class="w-full h-full object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300" />
                 </div>
             </div>
         </section>
@@ -94,16 +99,19 @@
             <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom bg-white">
                 <h3 class="text-xl font-semibold text-red-600 mb-2">Highest Crime Rate</h3>
                 <p class="text-xl font-semibold text-red-600 mb-2">State: <strong>Uttar Pradesh</strong></p>
-                <p class="text-sm text-gray-600 mt-4">Average Cases: <strong class="text-5xl font-bold text-gray-800">10,000+</strong></p>
+                <p class="text-sm text-gray-600 mt-4">Average Cases: <strong
+                        class="text-5xl font-bold text-gray-800">10,000+</strong></p>
             </div>
             <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom bg-white">
                 <h3 class="text-xl font-semibold text-red-600 mb-2">Lowest Crime Rate</h3>
                 <p class="text-xl font-semibold text-red-600 mb-2">State: <strong>Sikkim</strong></p>
-                <p class="text-sm text-gray-600 mt-4">Average Cases: <strong class="text-5xl font-bold text-gray-800">200</strong></p>
+                <p class="text-sm text-gray-600 mt-4">Average Cases: <strong
+                        class="text-5xl font-bold text-gray-800">200</strong></p>
             </div>
             <div class="highlight-box p-8 rounded-xl shadow-lg hover-zoom bg-white">
                 <h3 class="text-xl font-semibold text-red-600 mb-2">National Average</h3>
-                <p class="text-xl font-semibold text-red-600 mb-2">Average Crime Cases: <strong class="text-5xl font-bold text-gray-800">4,500</strong></p>
+                <p class="text-xl font-semibold text-red-600 mb-2">Average Crime Cases: <strong
+                        class="text-5xl font-bold text-gray-800">4,500</strong></p>
             </div>
         </section>
 
@@ -135,14 +143,16 @@
             title: 'Average Crime Cases by State',
             showlegend: true,
             xaxis: {
-                title: 'State'
-            },
+                title: 'State',
+                type: 'category'  
+        },
             yaxis: {
-                title: 'Average Crime Cases'
-            }
-        });
+            title: 'Average Crime Cases'
+        }
+});
     </script>
 
 </body>
+
 </html>
 {% endblock %}

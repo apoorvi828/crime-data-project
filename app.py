@@ -23,14 +23,15 @@ def get_total_cases_data():
     return json.dumps(traces, cls=plotly.utils.PlotlyJSONEncoder)
 
 def get_average_cases_by_state():
-    # Group the data by 'State' and calculate the mean for the specified columns
+   # Group the data by 'State' and calculate the mean for the specified columns
     avg_cases_by_state = df.groupby('State')[['Rape', 'K&A', 'DD', 'AoW', 'AoM', 'DV', 'WT']].mean()
 
     # Create histograms for each crime category with adjusted width
     traces = []
     for crime in avg_cases_by_state.columns:
-        trace = go.Histogram(
-            x=avg_cases_by_state[crime],
+        trace = go.Bar(
+            x=avg_cases_by_state.index,  # Use state names for x-axis
+            y=avg_cases_by_state[crime],
             name=crime,
             marker=dict(
                 line=dict(
